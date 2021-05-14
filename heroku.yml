@@ -1,3 +1,9 @@
-build:
+
+setup:
+  addons:
+    - plan: heroku-mysql
+      as: database
   docker:
-    web: Dockerfile
+    api: Dockerfile
+run:
+  api: wait-for-it database:3306 -- npm start --prefix /api
