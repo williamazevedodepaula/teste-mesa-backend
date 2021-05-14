@@ -1,15 +1,6 @@
 {
+
   "db": {
-    "host": "localhost",
-    "port": 3306,
-    "url": "mysql://root:1q2w3e4r@database/mesadb",
-    "database": "mesadb",
-    "password": "${DB_PASSWORD}",
-    "name": "db",
-    "user": "${DB_USERNAME}",
-    "connector": "mysql"
-  },
-  "db2": {
     "host": "localhost",
     "name": "db2",
     "connector": "memory"
