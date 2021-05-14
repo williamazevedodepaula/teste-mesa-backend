@@ -3,6 +3,7 @@ setup:
   addons:
     - plan: heroku-mysql
       as: database
+build:
   docker:
     api: Dockerfile
 run:
