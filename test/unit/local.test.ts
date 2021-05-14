@@ -18,12 +18,12 @@ describe('Testes Unitários de Local',function(){
             nome:'Praça do Operario',
             endereco:'Avenida Coronel Benjamin Guimaraes, 332',
             latitude:111111111,
-            longitude:-1111111
+            longitude:-111111111
         });
         local.should.have.property('id').that.equals(1);
         local.should.have.property('nome').that.equals('Praça do Operario');
         local.should.have.property('endereco').that.equals('Avenida Coronel Benjamin Guimaraes, 332');
-        local.should.have.property('latitude').that.equals(1111111);
-        local.should.have.property('longitude').that.equals(-1111111);
+        local.should.have.property('latitude').that.equals(111111111);
+        local.should.have.property('longitude').that.equals(-111111111);
     })
 })
