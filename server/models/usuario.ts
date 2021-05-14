@@ -2,7 +2,7 @@
 
 import { Usuario } from "entity/Usuario";
 
-module.exports = function(Usuario) {
+module.exports = function(Usuario:Usuario) {
 
     
 };

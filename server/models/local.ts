@@ -2,7 +2,7 @@
 
 import { Local } from "entity/Local";
 
-module.exports = function(Local) {
+module.exports = function(Local:Local) {
 
     
 };

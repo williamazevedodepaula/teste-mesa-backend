@@ -1,0 +1,39 @@
+{
+  "name": "Avaliacao",
+  "plural": "Avaliacoes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "id": true,
+      "generated": true
+    },
+    "comentario": {
+      "type": "string",
+      "required": true
+    },
+    "nota": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "local": {
+      "type": "belongsTo",
+      "model": "Local",
+      "foreignKey": "localId"
+    },
+    "usuario": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "usuarioId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

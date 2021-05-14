@@ -64,7 +64,20 @@
           "find": true,
           "findById": true,
           "replaceById": true,
-          "create": true,
+          "deleteById": true
+        }
+      }
+    }
+  },
+  "Avaliacao": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "find": true,
+          "findById": true,
           "deleteById": true
         }
       }
