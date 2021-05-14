@@ -28,6 +28,7 @@
           "logout":true,
           "create": true,
           "findById": true,
+          "avaliarLocal":true,
           "changePassword": true,
           "prototype.patchAttributes": true,
           "prototype.__create__locais": true
@@ -61,7 +62,8 @@
       "remoting": {
         "sharedMethods": {
           "*": false,
-          "find": true,
+          
+          "listar":true,
           "findById": true,
           "replaceById": true,
           "deleteById": true

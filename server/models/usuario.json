@@ -17,6 +17,15 @@
       "foreignKey": "usuarioId"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property":["avaliarLocal","__create__locais"],
+      "description":""
+    }
+  ],
   "methods": {}
 }
