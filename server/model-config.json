@@ -62,8 +62,8 @@
       "remoting": {
         "sharedMethods": {
           "*": false,
-          
-          "listar":true,
+          "find": true,
+          "listarMapa":true,
           "findById": true,
           "replaceById": true,
           "deleteById": true
