@@ -1,0 +1,17 @@
+version: '3'
+services:
+  database:
+    image: 'mysql:5'
+    container_name: database
+    ports:
+      - '3307:3306'
+    environment: 
+      - MYSQL_DATABASE=mesadb
+  api:
+    container_name: api
+    build: ./
+    ports:
+      - '3000:3000'    
+    depends_on:
+      - database
+    command: 'wait-for-it database:3306 -- npm start --prefix /api'

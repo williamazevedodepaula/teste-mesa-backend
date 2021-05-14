@@ -1,0 +1,22 @@
+{
+  "name": "Usuario",
+  "plural": "Usuarios",
+  "base": "User",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+
+  },
+  "validations": [],
+  "relations": {
+    "locais": {
+      "type": "hasMany",
+      "model": "Local",
+      "foreignKey": "usuarioId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

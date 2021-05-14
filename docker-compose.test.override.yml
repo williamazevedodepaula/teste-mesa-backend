@@ -1,0 +1,17 @@
+version: '3'
+services:
+  database:    
+    volumes:
+      - './docker/volumes/mesa/testeWilliam/test/var/lib/mysql:/var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=1q2w3e4r
+  api:
+    volumes:
+      - './:/api'
+    environment:
+      - NODE_ENV=test
+      - DB_PASSWORD=1q2w3e4r
+      - DB_USERNAME=root
+      - EMAIL_USER=teste.mesa@gmail.com
+      - EMAIL_PASSWORD=1q2w3e4r@
+      - EMAIL_FOR_RECEIVING_TEST=meu.email@exemplo.com
