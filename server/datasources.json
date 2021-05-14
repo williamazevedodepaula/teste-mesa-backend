@@ -2,23 +2,7 @@
 
   "db": {
     "host": "localhost",
-    "name": "db2",
+    "name": "db",
     "connector": "memory"
-  },
-  "mail": {
-    "name": "mail",
-    "connector": "mail",
-    "transports": [
-      {
-        "type": "SMTP",
-        "host": "smtp.gmail.com",
-        "secure": true,
-        "port": 465,
-        "auth": {
-          "user": "${EMAIL_USER}",
-          "pass": "${EMAIL_PASSWORD}"
-        }
-      }
-    ]
   }
 }
