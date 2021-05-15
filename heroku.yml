@@ -3,6 +3,8 @@ setup:
   addons:
     - plan: heroku-mysql
       as: database
+  config:
+    DB_HOST:CLEARDB_DATABASE_URL      
 build:
   docker:
     api: Dockerfile
