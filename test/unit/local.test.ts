@@ -16,8 +16,7 @@ const locais:Partial<Local>[] = [
 ]
 
 describe('Testes Unitários de Local', function () {
-  let LocalService:any;
-
+  
   describe('testes do Entity', function () {
     it('Deve criar um Local', async function () {
       let local: Local = new Local(undefined);
@@ -40,7 +39,8 @@ describe('Testes Unitários de Local', function () {
     })
 
     describe('Testes do Model Loopback', function () {
-
+      let LocalService:any;
+      
       before('realiza o stup e mock do Model',function(){
         LocalService = {remoteMethod:()=>{},find:()=>{}};
         LocalServiceFactory(LocalService);

@@ -5,18 +5,16 @@ import { Avaliacao } from "../../entity/Avaliacao";
 import { LocalJaAvaliadoException } from "../../exception/LocalJaAvaliadoException";
 import { LocalNaoEncontradoException } from "../../exception/LocalNaoEncontradoException";
 
-const app = require('../../server/server');
-
 module.exports = function (UsuarioService) {
-console.log('----------->')
+
   UsuarioService.avaliarLocal = async (id,localId,avaliacao:Avaliacao) => {
-    const LocalService = app.models.Local;
-    const AvaliacaoService = app.models.Avaliacao;
+    const LocalService = UsuarioService.app.models.Local;
+    const AvaliacaoService = UsuarioService.app.models.Avaliacao;
 
     const local = await LocalService.findById(localId);
     if(!local) throw new LocalNaoEncontradoException;
 
-    const avaliacaoAnterior = await AvaliacaoService.findOne({where:{usuarioId:id,localId:id}});
+    const avaliacaoAnterior = await AvaliacaoService.findOne({where:{usuarioId:id,localId:localId}});
     if (avaliacaoAnterior)  throw new LocalJaAvaliadoException;
 
     return AvaliacaoService.create(<Avaliacao>{
