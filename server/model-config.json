@@ -65,8 +65,7 @@
           "listar": true,
           "listarMapa":true,
           "findById": true,
-          "replaceById": true,
-          "deleteById": true
+          "prototype.__get__avaliacoes": true
         }
       }
     }
@@ -79,8 +78,7 @@
         "sharedMethods": {
           "*": false,
           "find": true,
-          "findById": true,
-          "deleteById": true
+          "findById": true
         }
       }
     }

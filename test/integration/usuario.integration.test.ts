@@ -133,6 +133,8 @@ describe('Testes de Integração de Usuario', function () {
   })
 
   it('usuário pode avaliar qualquer local', async function () {
+    await app.dataSources.db.automigrate('Avaliacao');//Apaga avaliacoes existentes
+
     let accessToken = await login(usuarios[0].email, (<any>usuarios[0]).$plainPassword);
 
     await supertest(app)
