@@ -13,16 +13,17 @@ export async function SetupTestDatabase(app: any): Promise<TestDatabaseResult> {
     throw Error("Testes de integração devem ser executados apenas em ambiente de TESTE, para evitar limpeza indesejada do banco de dados");
   }
 
-  const LocalModel = app.models.Local;
-  const UsuarioModel = app.models.Usuario;
+  const LocalService = app.models.Local;
+  const UsuarioService = app.models.Usuario;
 
   //Recria o banco, realizando drop de todas as tabelas
   await app.dataSources.db.automigrate('Local');
   await app.dataSources.db.automigrate('Usuario');
+  await app.dataSources.db.automigrate('Avaliacao');
   await app.dataSources.db.autoupdate();
-
-  let locais: Local[] = await SetupLocais();
+  
   let usuarios: Usuario[] = await SetupUsuarios();
+  let locais: Local[] = await SetupLocais();
 
   return {
     usuarios: usuarios,
@@ -34,20 +35,22 @@ export async function SetupTestDatabase(app: any): Promise<TestDatabaseResult> {
     let firstLocation: Local;
     let secondLocation: Local;
 
-    firstLocation = await LocalModel.create(<Partial<Local>>{
+    firstLocation = await LocalService.create(<Partial<Local>>{
       nome: 'Café Nice',
       endereco: 'Praça sete de setembro, centro, Belo Horizonte, MG',
       latitude: 111111111111,
-      longitude: -111111111111
+      longitude: -111111111111,
+      usuarioId:1,
     });
     firstLocation.should.have.property('id').that.equals(1);
 
 
-    secondLocation = await UsuarioModel.create(<Partial<Local>>{
+    secondLocation = await LocalService.create(<Partial<Local>>{
       nome: 'Igreja Sao Jose do Operario',
       endereco: 'Praça Sao Jose do Operario, Industrial, Contagem, MG',
       latitude: 22222222222,
-      longitude: -22222222222
+      longitude: -22222222222,
+      usuarioId:2,
     });
     secondLocation.should.have.property('id').that.equals(2);
 
@@ -57,20 +60,24 @@ export async function SetupTestDatabase(app: any): Promise<TestDatabaseResult> {
     let firstUsuario: Usuario;
     let secondUsuario: Usuario;
 
-    firstUsuario = await LocalModel.create(<Partial<Usuario>>{
+    const firstUsuarioPlainPassword = 'teste123';
+    firstUsuario = await UsuarioService.create(<Partial<Usuario>>{
       username: 'usuario_1',
       email: 'usuario_1@teste.com',
       password: 'teste123'
     });
     firstUsuario.should.have.property('id').that.equals(1);
+    (<any>firstUsuario).$plainPassword = firstUsuarioPlainPassword;
 
 
-    secondUsuario = await UsuarioModel.create(<Partial<Usuario>>{
+    const secondUsuarioPlainPassword = 'teste321';
+    secondUsuario = await UsuarioService.create(<Partial<Usuario>>{
       username: 'usuario_2',
       email: 'usuario_2@teste.com',
       password: 'teste321'
     });
     secondUsuario.should.have.property('id').that.equals(2);
+    (<any>secondUsuario).$plainPassword = secondUsuarioPlainPassword;
 
     return [firstUsuario, secondUsuario];
   }

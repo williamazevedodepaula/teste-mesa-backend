@@ -1,4 +1,5 @@
 import { BaseEntity } from './BaseEntity'
+import { Usuario } from './Usuario'
 
 /**
  * Representa um Local da aplicação
@@ -24,4 +25,12 @@ export class Local extends BaseEntity<Local>{
      * longitude do local
      */
     longitude:number
+    /**
+     * id do usuario dono do local
+     */
+    usuarioId:number
+    /**
+     * instancia do usuario dono do local
+     */
+    usuario?:Usuario
 }
