@@ -4,6 +4,7 @@ import { Usuario } from "entity/Usuario";
 import { Avaliacao } from "../../entity/Avaliacao";
 import { LocalJaAvaliadoException } from "../../exception/LocalJaAvaliadoException";
 import { LocalNaoEncontradoException } from "../../exception/LocalNaoEncontradoException";
+import { NotaAvaliacaoInvalidaException } from "../../exception/NotaAvaliacaoInvalidaException";
 
 module.exports = function (UsuarioService) {
 
@@ -16,6 +17,8 @@ module.exports = function (UsuarioService) {
 
     const avaliacaoAnterior = await AvaliacaoService.findOne({where:{usuarioId:id,localId:localId}});
     if (avaliacaoAnterior)  throw new LocalJaAvaliadoException;
+
+    if(!avaliacao.nota || avaliacao.nota < 0 || avaliacao.nota > 10) throw new NotaAvaliacaoInvalidaException;
 
     return AvaliacaoService.create(<Avaliacao>{
       comentario:avaliacao.comentario,

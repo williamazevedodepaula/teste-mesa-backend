@@ -13,6 +13,7 @@ import { Local } from '../../entity/Local';
 import { CreateServiceMock } from './ServiceMock';
 import { LocalNaoEncontradoException } from '../../exception/LocalNaoEncontradoException';
 import { LocalJaAvaliadoException } from '../../exception/LocalJaAvaliadoException';
+import { NotaAvaliacaoInvalidaException } from '../../exception/NotaAvaliacaoInvalidaException';
 
 const UsuarioServiceFactory = require('../../server/models/usuario.ts');
 const LocalServiceFactory = require('../../server/models/local.ts');
@@ -93,6 +94,26 @@ describe('Testes Unitários de Usuario', function () {
           comentario: 'Excelente local',
           nota: 10
         }).should.eventually.be.rejectedWith(LocalJaAvaliadoException).and.to.include({statusCode:400});
+      })
+
+      it('Deve retornar erro se tentar informar nota maior que 10', async function () {
+        sinon.stub(LocalService, "findById").resolves(local);
+        sinon.stub(AvaliacaoService, "findOne").resolves(undefined);
+        sinon.stub(AvaliacaoService, "create").resolves(undefined);
+        await UsuarioService.avaliarLocal(2, 3, <Partial<Avaliacao>>{
+          comentario: 'Excelente local',
+          nota: 11
+        }).should.eventually.be.rejectedWith(NotaAvaliacaoInvalidaException).and.to.include({statusCode:400});
+      })
+
+      it('Deve retornar erro se tentar informar nota menor que 0', async function () {
+        sinon.stub(LocalService, "findById").resolves(local);
+        sinon.stub(AvaliacaoService, "findOne").resolves(undefined);
+        sinon.stub(AvaliacaoService, "create").resolves(undefined);
+        await UsuarioService.avaliarLocal(2, 3, <Partial<Avaliacao>>{
+          comentario: 'Excelente local',
+          nota: -1
+        }).should.eventually.be.rejectedWith(NotaAvaliacaoInvalidaException).and.to.include({statusCode:400});
       })
 
     })
