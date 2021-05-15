@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         run: |
           docker-compose -f docker-compose.yml -f docker-compose.test.override.yml build
-          docker-compose -f docker-compose.yml -f docker-compose.test.override.yml run test
+          docker-compose -f docker-compose.yml -f docker-compose.test.override.yml run api
 
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
