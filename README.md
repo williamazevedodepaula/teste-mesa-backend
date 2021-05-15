@@ -21,6 +21,10 @@ A interface do swagger com a documentação dos endpoints da API estão em:
 http://teste-mesa-api.williamazevedodepaula.com.br:3000/explorer/
 ```
 
+## CI/CD
+
+Foi configurado um pipeline de CI/CD para realizar build da imagem do docker e subida da imagem do banco de dados, e executar todos os testes automatizados, tanto os unitários quanto os de integração.
+A Etapa de deploy não foi implementada ainda, devido a problemas com o Heroku, que me levaram a migrar para um EC2 na AWS, e a extrapolar o horário previsto para a entrega.
 
 ## Principais métodos da API:
 
@@ -282,6 +286,9 @@ Diretório que contém arquivos utilizados durante o build da imagem do docker. 
 * Entrypont: entrypoint da imagem do docker
 * wait-for-it: script utilizado para que a api espere a correta inicializacao do banco de dados antes de iniciar o loopback
 
+### .github/workflow
+
+Diretório com as configurações do pipeline de CI/CD
 
 ### Entity
 
@@ -303,3 +310,4 @@ Para melhor compreensão, o Models do loopback foram referidos no código como *
 ### Test
 
 Contém dois subdiretórios: **integration** e **unit**, contendo os testes de integração e unitários, respectivamente. Todos os testes foram escritos utilizando **mocha**, **chai** e **sinon**.
+
