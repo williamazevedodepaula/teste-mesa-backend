@@ -1,8 +1,33 @@
 {
-
   "db": {
-    "host": "localhost",
+    "host": "${DB_HOST}",
+    "port": 3306,
+    "url": "mysql://root:1q2w3e4r@database/mesadb",
+    "database": "mesadb",
+    "password": "${DB_PASSWORD}",
     "name": "db",
+    "user": "${DB_USERNAME}",
+    "connector": "mysql"
+  },
+  "db2": {
+    "host": "localhost",
+    "name": "db2",
     "connector": "memory"
+  },
+  "mail": {
+    "name": "mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "${EMAIL_USER}",
+          "pass": "${EMAIL_PASSWORD}"
+        }
+      }
+    ]
   }
 }

@@ -7,4 +7,4 @@ build:
   docker:
     api: Dockerfile
 run:
-  api: wait-for-it database:3306 -- npm start --prefix /api
+  api: npm start --prefix /api

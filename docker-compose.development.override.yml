@@ -14,3 +14,4 @@ services:
       - DB_USERNAME=root
       - EMAIL_USER=teste.mesa@gmail.com
       - EMAIL_PASSWORD=1q2w3e4r@
+      - DB_HOST=localhost
