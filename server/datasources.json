@@ -1,6 +1,6 @@
 {
   "db": {
-    "host": "${DB_HOST}",
+    "host": "localhost",
     "port": 3306,
     "url": "mysql://root:1q2w3e4r@database/mesadb",
     "database": "mesadb",
