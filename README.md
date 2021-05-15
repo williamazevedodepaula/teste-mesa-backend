@@ -9,6 +9,11 @@ A execução do projeto ocorre através do *docker-compose*, que contém a descr
 * api: A API desenvolvida
 
 
+O deploy da versão de produção foi realizado em um EC2 da Amazon, disponível no endereço:
+
+```
+http://teste-mesa-api.williamazevedodepaula.com.br:3000/explorer/
+```
 
 ## Instalação/Execução
 
@@ -72,7 +77,7 @@ Os testes automatizados foram divididos em dois grupos: **Testes Unitários** e 
 Os testes unitários são independentes de banco de dados e do framework, e podem ser executados sem que a aplicação esteja executando:
 
 ```
-npm run unit-test
+npm run test:unit
 ```
 
 Os Testes de integração, por sua vez, dependem do Framework e do banco de dados, e por isso precisam ser executados DENTRO DO CONTAINER DO DOCKER. Alem disso, por segurança, é necessário que esteja executando em ambiente de **TESTE**. Se executar o comando para teste de integração em ambiente de **DESENVOLVIMENTO**, os testes irão falhar com uma mensagem de alerta no console.
@@ -87,3 +92,7 @@ Para executar todos os testes (dentro do container):
 ```
 docker exec -it api npm test
 ```
+
+## Heroku
+
+O projeto foi configurado para funcionar com o Heroku (vide arquivo **heroku.yml**), mas ocorreram erros ao realizar o deploy com Docker e, por esse motivo, optei por transferir o deploy para a um EC2 na AWS.

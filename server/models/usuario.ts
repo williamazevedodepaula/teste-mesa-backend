@@ -8,7 +8,7 @@ import { LocalNaoEncontradoException } from "../../exception/LocalNaoEncontradoE
 const app = require('../../server/server');
 
 module.exports = function (UsuarioService) {
-
+console.log('----------->')
   UsuarioService.avaliarLocal = async (id,localId,avaliacao:Avaliacao) => {
     const LocalService = app.models.Local;
     const AvaliacaoService = app.models.Avaliacao;

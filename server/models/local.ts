@@ -1,11 +1,27 @@
 'use strict';
 
 import { Local } from "entity/Local";
-import { ModoDeConsultaInvalido } from "../../exception/ModoDeConsultaInvalido";
 
 module.exports = function (LocalService) {
 
 
+  LocalService.listar = async () => {
+    return LocalService.find({order:'nome ASC'});
+  }
+  LocalService.remoteMethod('listar', {
+    description: 'Find all instances of the model from the data source, sorter by name.',
+    accepts: [
+
+    ],
+    returns: {
+      arg: 'data',
+      type: ['Local'],
+      root: true
+    },
+    http: { verb: 'get', path: '/' }
+  })
+  
+  
   LocalService.listarMapa = async (lat: number, long: number) => {
     return (await LocalService.find()).sort((local1: Local, local2: Local) => {
       const dist1 = distance(local1.latitude, local1.longitude, lat, long);
@@ -16,7 +32,7 @@ module.exports = function (LocalService) {
     });
   }
   LocalService.remoteMethod('listarMapa', {
-    description: 'Find all instances of the model matched by filter from the data source, sorter by proximity.',
+    description: 'Find all instances of the model from the data source, sorter by proximity.',
     accepts: [
       {
         arg: 'lat',

@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "start": "npx nodemon --delay 80ms -e json,js,ts --ignore 'ts-node-*/*.js' --signal SIGHUP --exec node -r ts-node/register --inspect=0.0.0.0:4000 server/server.js",
     "test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/**/**.test.ts' ",
-    "unit-test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/unit/**.test.ts' ",
+    "test:unit": "npx mocha -r ts-node/register -t 10000 --recursive 'test/unit/**.test.ts' ",
     "integration-test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/integration/**.test.ts' ",
     "posttest": "npm run lint"
   },
@@ -17,6 +17,7 @@
     "@types/chai": "^4.2.11",
     "@types/loopback": "^3.2.9",
     "@types/mocha": "^7.0.2",
+    "@types/sinon": "^10.0.0",
     "chai": "^4.2.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
@@ -28,6 +29,7 @@
     "mocha": "^7.1.2",
     "moment": "^2.25.3",
     "serve-favicon": "^2.0.1",
+    "sinon": "^10.0.0",
     "strong-error-handler": "^3.0.0",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.2"
