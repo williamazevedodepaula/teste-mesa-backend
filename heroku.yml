@@ -1,5 +1,5 @@
 build:
   docker:
-    api: Dockerfile
+    web: Dockerfile
 run:
-  api: npm start --prefix /api
+  web: npm start --prefix /api
