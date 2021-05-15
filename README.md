@@ -9,13 +9,175 @@ A execução do projeto ocorre através do *docker-compose*, que contém a descr
 * api: A API desenvolvida
 
 
-O deploy da versão de produção foi realizado em um EC2 da Amazon, disponível no endereço:
+O deploy da versão de produção foi realizado em um EC2 da Amazon disponível no endereço:
+
+```
+http://teste-mesa-api.williamazevedodepaula.com.br:3000/api/
+```
+
+A interface do swagger com a documentação dos endpoints da API estão em:
 
 ```
 http://teste-mesa-api.williamazevedodepaula.com.br:3000/explorer/
 ```
 
-## Instalação/Execução
+
+## Principais métodos da API:
+
+Todos os métodos da API são prefixados pela url referida a seguir como {{URL}}, que em produção corresponde a http://teste-mesa-api.williamazevedodepaula.com.br:3000/api/.
+Os métodos sinalizados com **(Autenticado)** precisam obrigatoriamente receber o Header **Authorization**, contendo o **AccessToken** obtido no endpoint de login.
+
+### Cadastrar usuário:  
+
+```
+POST {{URL}}/Usuarios   
+```
+com o body:
+
+```
+{
+  "username":"nome de usuario",
+  "email: "email@usuario.com",
+  "password":"1234"
+}
+```
+
+### Realizar login:  
+
+```
+POST /Usuarios/login
+```
+com o body:
+
+```
+{
+  "email: "email@usuario.com",
+  "password":"1234"
+}
+```
+
+Retorna um **AccessToken**, cujo **ID** deve ser passado no header de todas as requisições autenticadas
+
+### Realizar logout (Autenticado):  
+
+```
+POST /Usuarios/logout
+```
+
+Invalida o **AccessToken**
+
+
+### Visualizar perfil (Autenticado):  
+
+```
+GET /Usuarios/{:id}
+```
+
+retorna os dados do usuário
+
+### Alterar dados cadastrais (Autenticado):  
+
+```
+PATCH /Usuarios/{:id}
+```
+com o body contendo as propriedades que deseja alterar:
+
+```
+{
+  "email: "novo.email@usuario.com",
+  "password":"nova.senha"
+}
+```
+
+### Cadastrar um local (Autenticado):  
+
+```
+POST /Usuarios/{:id do usuario}/locais
+```
+com o body:
+
+```
+{
+  "nome: "Museu Historico Vespasiano",
+  "endereco":"Vespasiano, MG",
+  "latitude": -19.46446270797849
+  "longitude": -44.246931423539394
+}
+```
+
+### Avaliar um local (Autenticado):  
+
+```
+POST /Usuarios/{:id do usuario}/local/{:id do local}/avaliar
+```
+com o body:
+
+```
+{
+  "comentario: "Ótimo local",
+  "nota":10
+}
+```
+
+### Listar os locais no modo Lista (Autenticado):  
+
+```
+GET /Locais
+```
+
+Retorna os locais, em ordem alfabética do nome do local
+
+
+### Listar os locais no modo mapa (Autenticado):  
+
+
+```
+GET /Locais/lat/{:lat}/long/{:long}/map
+```
+
+Retorna os locais, ordenados pela proximidade da Latitude e longitude informada nos parâmetros **lat** e **long**, respectivamente
+
+### Listar as avaliações de um local (Autenticado):  
+
+
+```
+GET /Locais/{:id}/avaliacoes
+```
+
+Retorna as avaliações de um local
+
+### Consultar um local (Autenticado):  
+
+
+```
+GET /Locais/{:id}
+```
+
+Retorna os dados de um local
+
+### Listar todas as avaliações (Autenticado):  
+
+
+```
+GET /Avaliacoes
+```
+
+Retorna os dados de todas as avaliações, de todos os locais
+
+
+
+### Consultar uma avaliação (Autenticado):  
+
+
+```
+GET /Avaliacoes/{:id}
+```
+
+Retorna os dados de uma avaliacao
+
+
+
+## Instalação/Execução - Ambiente de DEV
 
 ### Pré-Requisitos: 
 
@@ -66,9 +228,12 @@ Log do banco de dados:
 
 http://localhost:3000/api
 
-e a **DOCUMENTAÇÂO** completa da API, utilizando a interface *swagger*, bem como interface gráfica para interação com a API estarão disponíveis em:
+e a **DOCUMENTAÇÂO** completa da API, utilizando a interface **swagger**, bem como interface gráfica para interação com a API estarão disponíveis em:
 
 http://localhost:3000/explorer/
+
+
+
 
 ## Testes Automatizados
 
@@ -92,6 +257,9 @@ Para executar todos os testes (dentro do container):
 ```
 docker exec -it api npm test
 ```
+
+## 
+
 
 ## Organização do código-fonte
 
