@@ -11,8 +11,7 @@
     "test": "npx mocha --exit  -r ts-node/register -t 10000 --recursive 'test/**/**.test.ts' ",
     "test:unit": "npx mocha --exit  -r ts-node/register -t 10000 --recursive 'test/unit/**.test.ts' ",
     "test:integration": "npx mocha --exit  -r ts-node/register -t 10000 --recursive 'test/integration/**.test.ts' ",
-    "posttest": "npm run lint",
-    "run:prod":"git pull origin main && docker-compose -f docker-compose.yml -f docker-compose.production.override.yml up -d"
+    "posttest": "npm run lint"
   },
   "dependencies": {
     "@types/chai": "^4.2.11",
