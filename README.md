@@ -84,7 +84,7 @@ Os Testes de integração, por sua vez, dependem do Framework e do banco de dado
 Para executar o teste de integração, dentro do container:
 
 ```
-docker exec -it api npm run integration-test
+docker exec -it api npm run test:integration
 ```
 
 Para executar todos os testes (dentro do container):
@@ -93,6 +93,45 @@ Para executar todos os testes (dentro do container):
 docker exec -it api npm test
 ```
 
-## Heroku
+## Organização do código-fonte
 
-O projeto foi configurado para funcionar com o Heroku (vide arquivo **heroku.yml**), mas ocorreram erros ao realizar o deploy com Docker e, por esse motivo, optei por transferir o deploy para a um EC2 na AWS.
+A seguir está a descrição dos principais diretórios e arquivos da aplicação
+
+### Raiz
+
+Dentre os vários arquivos de configuração na raiz do projeto, podemos destacar:
+
+* Dockerfile: Arquivo com diretrizes para construcao da imagem do docker à partir do codigo fonte
+* docker-compose.yml: Arquivo docker-compose base, contendo a descrição dos serviços
+* docker-compose.test.override.yml: Arquivo docker-compose override para ambiente de teste
+* docker-compose.test.development.yml: Arquivo docker-compose override para ambiente de desenvolvimento
+* docker-compose.production.override.yml: Arquivo docker-compose override para ambiente de produção (Atualmente, um EC2 na AWS)
+* heroku.yml: O projeto foi configurado para funcionar com o Heroku (vide arquivo **heroku.yml**), mas ocorreram erros ao realizar o deploy com Docker e, por esse motivo, optei por transferir o deploy para a um EC2 na AWS.
+### docker
+
+Diretório que contém arquivos utilizados durante o build da imagem do docker. Dentro deste diretório é montado o **volume** com os dados do banco de dados durante a execução da aplicação, em **docker/volumes**.
+
+* Entrypont: entrypoint da imagem do docker
+* wait-for-it: script utilizado para que a api espere a correta inicializacao do banco de dados antes de iniciar o loopback
+
+
+### Entity
+
+Neste diretório estão as classes que definem as entidades utilizadas na aplicação
+
+* BaseEntity: Entidade base, da qual todas herdam
+* Usuario: Usuário do sistema
+* Local: Local cadastrado pelo usuário
+* Avaliacao: Avaliacao de um usuário sobre um local
+
+### Server
+
+Neste diretório estão os arquivos necessários à execução do loopback, e os modelos do mesmo, que refletem a estrutura das tambelas do banco de dados em um modelo ORM. Além disso, os modelos do loopback fornecem uma camada de "repositório" para a aplicação. Na definicação dos modelos, os endpoints da API são vinclulados a métodos dessa camada. Cada modelo possui um arquivo .json, com a definição do modelo, e um arquivo .ts, com implementação de métodos e definições de endpoints.
+
+Possui um Model para cada uma das 3 entidades citadas na seção anterior.
+
+Para melhor compreensão, o Models do loopback foram referidos no código como **Services**.
+
+### Test
+
+Contém dois subdiretórios: **integration** e **unit**, contendo os testes de integração e unitários, respectivamente. Todos os testes foram escritos utilizando **mocha**, **chai** e **sinon**.
